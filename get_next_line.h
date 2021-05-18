@@ -6,7 +6,7 @@
 /*   By: yurlee <yurlee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:52:09 by yurlee            #+#    #+#             */
-/*   Updated: 2021/05/18 00:35:27 by yurlee           ###   ########.fr       */
+/*   Updated: 2021/05/18 17:09:04 by yurlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+# define FLAG_ERROR -1
+# define FLAG_SUCCESS 1
+# define FLAG_EOF 0
 
 int		get_next_line(int fd, char **line);
 char	*ft_strjoin(char const *s1, char const *s2);
