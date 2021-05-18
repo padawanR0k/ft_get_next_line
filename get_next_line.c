@@ -6,7 +6,7 @@
 /*   By: yurlee <yurlee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:51:11 by yurlee            #+#    #+#             */
-/*   Updated: 2021/05/18 19:05:06 by yurlee           ###   ########.fr       */
+/*   Updated: 2021/05/19 00:43:46 by yurlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,17 @@ int get_next_line(int fd, char **line)
 			break ;
 		}
 	}
-	if (result == -1)
-	{
-		// free all
+	if (read_cnt == -1)
 		return (FLAG_ERROR);
-	}
-	else if (result == 0 || result == -2)
+	else if (result == 0)
+		return (FLAG_SUCCESS);
+	else if (result == -2)
 	{
-		// if (result)
-		// 	printf("str_saved\n%s\n", str_saved);
+		if (str_saved)
+		{
+			free(str_saved);
+			str_saved = NULL;
+		}
 		return (FLAG_EOF);
 	}
 	return (result);
