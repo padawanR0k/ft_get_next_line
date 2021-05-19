@@ -6,7 +6,7 @@
 /*   By: yurlee <yurlee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:52:09 by yurlee            #+#    #+#             */
-/*   Updated: 2021/05/19 00:26:18 by yurlee           ###   ########.fr       */
+/*   Updated: 2021/05/19 17:35:24 by yurlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 int		get_next_line(int fd, char **line);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strdup(const char *s1);
-char	*ft_strchr(const char *s, int c);
+int		ft_strchr(char *src, char c);
 size_t	ft_strlen(const char *s);
-
+char	*ft_strncpy(char *dest, char *src, unsigned int n);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 #endif

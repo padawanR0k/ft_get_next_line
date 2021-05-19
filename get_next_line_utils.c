@@ -6,7 +6,7 @@
 /*   By: yurlee <yurlee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:42:02 by yurlee            #+#    #+#             */
-/*   Updated: 2021/05/18 17:09:16 by yurlee           ###   ########.fr       */
+/*   Updated: 2021/05/19 17:35:15 by yurlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,18 +88,43 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-char	*ft_strchr(const char *s, int c)
+int		ft_strchr(char *src, char c)
 {
-	unsigned char		chr;
+	unsigned int idx;
 
-	chr = c;
-	while (*(s))
+	idx = 0;
+	while (src[idx])
 	{
-		if (*(s) == chr)
-			return ((char *)(s));
-		s++;
+		if (src[idx] == c)
+			return (idx);
+		idx++;
 	}
-	if (c == 0)
-		return ((char *)(s));
-	return (0);
+	if (c == '\0')
+		return (idx);
+	return (-1);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*str;
+	size_t	str_len;
+	size_t	size;
+
+	if (!s)
+		return (0);
+	size = 0;
+	while (s[size] != '\0' && size < len)
+		size++;
+	str_len = ft_strlen((char *)(s));
+	if (str_len <= start)
+	{
+		str = (char *)malloc(sizeof(char) * 1);
+		str[0] = 0;
+		return (str);
+	}
+	str = (char *)malloc(sizeof(char) * (size + 1));
+	if (!str)
+		return (0);
+	ft_memcpy(str, (char *)s + start, len);
+	return (str);
 }

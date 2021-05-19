@@ -5,7 +5,7 @@ int main(int argc, char const *argv[])
 {
 	if (argc == 2)
 	{
-		char *line = 0;
+		char *line = NULL;
 		int fd = open(argv[1], O_RDONLY);
 		int ret;
 		// ret = get_next_line(fd, &line);
@@ -17,7 +17,7 @@ int main(int argc, char const *argv[])
 		while (1)
 		{
 			ret = get_next_line(fd, &line);
-			printf("\n------line------\n%s\n------line------\n\n", line);
+			printf("|%s\n", line);
 			if (ret == 0 || ret == -1)
 				break ;
 		}
@@ -29,7 +29,7 @@ int main(int argc, char const *argv[])
 		while (1)
 		{
 			ret = get_next_line(0, &line);
-			printf("\n------line------\n%s\n------line------\n\n", line);
+			printf("|%s\n", line);
 			if (ret == 0 || ret == -1)
 				break ;
 		}
