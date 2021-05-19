@@ -6,7 +6,7 @@
 /*   By: yurlee <yurlee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:51:11 by yurlee            #+#    #+#             */
-/*   Updated: 2021/05/19 19:37:27 by yurlee           ###   ########.fr       */
+/*   Updated: 2021/05/20 00:56:10 by yurlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,16 @@ int make_line(char **storage, char **line, ssize_t read_cnt)
 	int		newline_idx;
 	char	*temp;
 
+	// printf("storage1\t[%s]\n", *storage);
 	newline_idx = ft_strchr(*storage, '\n');
 	// printf("idx\t\t%d\n", newline_idx);
 	// printf("read_cnt\t%zd\n", read_cnt);
-	// printf("storage\t[%s]\n", *storage);
+	// printf("storage2\t[%s]\n", *storage);
 	if (newline_idx != -1 && newline_idx == read_cnt - 1) // 버퍼 끝이 개행임
 	{
-		*line = *storage;
+		storage[0][newline_idx] = '\0';
+		*line = ft_strdup(storage[0]);
+		*storage = NULL;
 	}
 	else
 	{
@@ -47,11 +50,8 @@ int make_line(char **storage, char **line, ssize_t read_cnt)
 		}
 		else
 		{
-			// printf("복사불가? 0\n");
 			storage[0][newline_idx] = '\0';
-			// printf("복사불가? 1\n");
 			*line = ft_strdup(*storage);
-			// printf("복사불가? 2\n");
 			// free(*storage);
 			temp = ft_strdup(storage[0] + newline_idx + 1);
 			*storage = temp;
@@ -63,12 +63,13 @@ int make_line(char **storage, char **line, ssize_t read_cnt)
 /**
  * storage에 개행을 기준으로 좌측에 나타나는 값들을 저장한다.
  **/
-int	save_line(char **storage, char buf[BUFFER_SIZE + 1])
+int	save_line(char **storage, char *buf)
 {
 	int			newline_idx;
 	char		*temp;
 
 	temp = NULL;
+	// printf("buf [%s] \n", buf);
 	newline_idx = ft_strchr(buf, '\n');
 	if (*storage != NULL)
 	{
@@ -94,7 +95,11 @@ int	read_line(ssize_t *read_cnt, char **storage, int fd)
 		while ((*read_cnt = read(fd, buf, BUFFER_SIZE)) && *read_cnt != -1)
 		{
 			buf[*read_cnt] = '\0';
+			// printf("read_cnt [%zd] \n", *read_cnt);
+			// printf("buf [%s] \n", buf);
 			newline_idx = save_line(storage, buf);
+			// printf("newline_idx %d \n", newline_idx);
+			// printf("storage %s \n", *storage);
 			if (newline_idx != -1)
 				return (FLAG_SUCCESS);
 		}
@@ -118,10 +123,7 @@ int	get_next_line(int fd, char **line)
 	result = read_line(&read_cnt, &storage, fd);
 	if (result == -1)
 		return (-1);
-	result = make_line(&storage, line, read_cnt);
-	// printf("========= \n");
-	// printf("line[%s] \n", *line);
-	// printf("storage[%s] \n", storage);
-	// printf("result[%d]\n", result);
+	if (storage != NULL)
+		result = make_line(&storage, line, read_cnt);
 	return (get_result(storage, result, read_cnt));
 }
