@@ -2,3 +2,5 @@
 gnl-unit-test/
 gnlkiller/
 gnlTester/
+test.sh
+.gitignore

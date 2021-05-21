@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yurlee <yurlee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:51:11 by yurlee            #+#    #+#             */
-/*   Updated: 2021/05/21 13:37:14 by yurlee           ###   ########.fr       */
+/*   Updated: 2021/05/21 13:39:37 by yurlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,22 +85,22 @@ int	read_line(ssize_t *read_cnt, char **storage, int fd)
 
 int	get_next_line(int fd, char **line)
 {
-	static char *storage;
+	static char *storage[MAX_FD];
 	ssize_t		read_cnt;
 	int			flag;
 
 	if (BUFFER_SIZE < 1 || fd < 0 || fd > MAX_FD || line == NULL)
 		return (FLAG_ERROR);
-	flag = read_line(&read_cnt, &storage, fd);
+	flag = read_line(&read_cnt, &storage[fd], fd);
 	if (flag == FLAG_ERROR)
 		return (FLAG_ERROR);
-	if (flag == 0 && read_cnt == 0 && storage == NULL)
+	if (flag == 0 && read_cnt == 0 && storage[fd] == NULL)
 	{
 		*line = (char *)malloc(sizeof(char) * 1);
 		*line[0] = '\0';
-		return (free_all(&storage, FLAG_EOF));
+		return (free_all(&storage[fd], FLAG_EOF));
 	}
-	if (storage != NULL)
-		flag = make_line(&storage, line);
-	return (ret_flag(storage, flag, read_cnt));
+	if (storage[fd] != NULL)
+		flag = make_line(&storage[fd], line);
+	return (ret_flag(storage[fd], flag, read_cnt));
 }
