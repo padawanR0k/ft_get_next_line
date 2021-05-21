@@ -6,7 +6,7 @@
 /*   By: yurlee <yurlee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:52:09 by yurlee            #+#    #+#             */
-/*   Updated: 2021/05/21 13:05:33 by yurlee           ###   ########.fr       */
+/*   Updated: 2021/05/21 16:55:09 by yurlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,4 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strdup(const char *s1);
 int		get_idx(char *src, char c);
 size_t	ft_strlen(const char *s);
-char	*ft_strncpy(char *dest, char *src, unsigned int n);
 #endif

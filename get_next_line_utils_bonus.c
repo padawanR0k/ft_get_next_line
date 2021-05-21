@@ -6,11 +6,11 @@
 /*   By: yurlee <yurlee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:42:02 by yurlee            #+#    #+#             */
-/*   Updated: 2021/05/21 13:05:33 by yurlee           ###   ########.fr       */
+/*   Updated: 2021/05/21 16:55:12 by yurlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *s)
 {

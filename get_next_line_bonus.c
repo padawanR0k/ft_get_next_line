@@ -6,11 +6,11 @@
 /*   By: yurlee <yurlee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:51:11 by yurlee            #+#    #+#             */
-/*   Updated: 2021/05/21 13:39:37 by yurlee           ###   ########.fr       */
+/*   Updated: 2021/05/21 16:55:02 by yurlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	ret_flag(char *storage, int flag, ssize_t read_cnt)
 {
