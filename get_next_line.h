@@ -6,7 +6,7 @@
 /*   By: yurlee <yurlee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:52:09 by yurlee            #+#    #+#             */
-/*   Updated: 2021/05/19 17:35:24 by yurlee           ###   ########.fr       */
+/*   Updated: 2021/05/20 23:07:51 by yurlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,4 @@ char	*ft_strdup(const char *s1);
 int		ft_strchr(char *src, char c);
 size_t	ft_strlen(const char *s);
 char	*ft_strncpy(char *dest, char *src, unsigned int n);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
 #endif
