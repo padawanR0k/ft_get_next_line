@@ -6,7 +6,7 @@
 /*   By: yurlee <yurlee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:51:11 by yurlee            #+#    #+#             */
-/*   Updated: 2021/05/21 13:37:14 by yurlee           ###   ########.fr       */
+/*   Updated: 2021/05/22 19:11:46 by yurlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ret_flag(char *storage, int flag, ssize_t read_cnt)
 	return (ret);
 }
 
-int	free_all(char **storage, int ret)
+int	free_storage(char **storage, int ret)
 {
 	free(*storage);
 	return (ret);
@@ -38,7 +38,7 @@ int	make_line(char **storage, char **line)
 	if (newline_idx == -1)
 	{
 		if (!(*line = ft_strdup(storage[0])))
-			return (free_all(storage, FLAG_ERROR));
+			return (free_storage(storage, FLAG_ERROR));
 		free(*storage);
 		*storage = NULL;
 	}
@@ -46,9 +46,9 @@ int	make_line(char **storage, char **line)
 	{
 		storage[0][newline_idx] = '\0';
 		if (!(*line = ft_strdup(storage[0])))
-			return (free_all(storage, FLAG_ERROR));
+			return (free_storage(storage, FLAG_ERROR));
 		if (!(temp = ft_strdup(storage[0] + newline_idx + 1)))
-			return (free_all(storage, FLAG_ERROR));
+			return (free_storage(storage, FLAG_ERROR));
 		free(*storage);
 		*storage = temp;
 	}
@@ -69,12 +69,12 @@ int	read_line(ssize_t *read_cnt, char **storage, int fd)
 		if (*storage != NULL)
 		{
 			if (!(temp = ft_strdup(*storage)))
-				return (free_all(storage, FLAG_ERROR));
+				return (free_storage(storage, FLAG_ERROR));
 			else
 				free(*storage);
 		}
 		if (!(*storage = temp == NULL ? ft_strdup(buf) : ft_strjoin(temp, buf)))
-			return (free_all(storage, FLAG_ERROR));
+			return (free_storage(storage, FLAG_ERROR));
 		else
 			free(temp);
 		if (newline_idx != -1)
@@ -96,9 +96,10 @@ int	get_next_line(int fd, char **line)
 		return (FLAG_ERROR);
 	if (flag == 0 && read_cnt == 0 && storage == NULL)
 	{
-		*line = (char *)malloc(sizeof(char) * 1);
+		if (!(*line = (char *)malloc(sizeof(char) * 1)))
+			return (FLAG_ERROR);
 		*line[0] = '\0';
-		return (free_all(&storage, FLAG_EOF));
+		return (FLAG_EOF);
 	}
 	if (storage != NULL)
 		flag = make_line(&storage, line);

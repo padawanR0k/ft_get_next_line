@@ -6,7 +6,7 @@
 /*   By: yurlee <yurlee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:42:02 by yurlee            #+#    #+#             */
-/*   Updated: 2021/05/21 13:05:33 by yurlee           ###   ########.fr       */
+/*   Updated: 2021/05/22 19:07:29 by yurlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*ft_strdup(const char *s1)
 
 	len = ft_strlen(s1);
 	copy = (char *)malloc(sizeof(char) * (len + 1));
+	if (!copy)
+		return (0);
 	idx = 0;
 	if (copy)
 	{
